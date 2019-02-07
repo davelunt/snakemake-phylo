@@ -1,0 +1,12 @@
+Building DAG of jobs...
+Job counts:
+	count	jobs
+	1	raxmltree
+	1
+
+[Mon Jan 28 14:29:29 2019]
+rule raxmltree:
+    input: results/ape_alignment.afa
+    output: RAxML_result.output
+    jobid: 0
+

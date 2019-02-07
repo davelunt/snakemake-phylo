@@ -1,0 +1,88 @@
+rule raxmltree:
+    input:
+        tree="RAxML_bestTree.tree",
+        fasta="snp_fasta/all.fasta"
+    output:
+        "RAxML_result.output"
+    threads: 20
+    shell:
+        "raxmlHPC-PTHREADS-SSE3 -T {threads} -f e -m GTRGAMMA -s {input.fasta} -t {input.tree} -n output --no-bfgs"
+
+
+rule raxml2:
+    input:
+        partitions = 'partitions.csv',
+        phy = 'concat.phy'
+    output:
+        'RAxML_bestTree.outRaxml'
+    shell:"""
+        module load raxml/8.2.4
+        raxml -T 24 -m PROTGAMMAWAG -s {input.phy} -n outRaxml -p 12345 -q {input.partitions} -x 12345 -f a -# 100
+
+
+
+rule align_protein:
+    input:
+        'prot/{sample}.fasta'
+    output:
+        'muscled/{sample}.fasta'
+    shell:"""
+        muscle -in {input} -out {output}
+    """
+
+
+mine
+
+rule raxmltree:
+    input:
+        fasta="results/ape_alignment.afa"
+    output:
+        "RAxML_result.output"
+    shell:
+        "raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s {input}} -n T20"
+
+
+rule raxmltree:
+        input:
+            fasta="results/ape_alignment.afa"
+        output:
+            "{input}"
+        shell:
+            "raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 --no­bfgs -s {input} -n {output}"
+
+
+-n is output name
+-s is infile
+
+­w FULL (!) path to the directory into which RAxML shall write its output files
+      DEFAULT: current directory
+Name of the working directory where RAxML shall write its output files to. Note that you need to specify the full path and not the relative path!
+Example:
+raxmlHPC ­m GTRCAT ­p 12345 ­s alg -­w /home/stamatak/Desktop/myAnalysys ­n TEST
+
+­­--no­bfgs
+Disables automatic usage of BFGS method to optimize GTR rates on unpartitioned DNA datasets . Using BFGS can improve speeds for model optimization by up to 30%. It's enabled by default when analyzing single­partition DNA datasets.
+DEFAULT: BFGS on
+Example: raxmlHPC ­-p 12345 ­-s alg ­­--no­bfgs ­-n TEST ­-m GTRGAMMA
+
+
+
+
+rule iqtree:
+    input:
+        "results/mafft/ape_alignment.afa"
+    output:
+        'results/mafft/{input}.treefile'
+    shell:
+        "iqtree -s {input} -nt AUTO"
+# I need a samples file with sample info if going to use {sample}
+
+
+rule fasttree:
+    input:
+        
+
+
+
+
+https://github.com/tijeco/ReproducibilityTutorial

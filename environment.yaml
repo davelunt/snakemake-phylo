@@ -1,0 +1,16 @@
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - snakemake-minimal =5.2.4
+  - python
+  - jinja2 =2.10
+  - networkx =2.1
+  - matplotlib =2.2.3
+  - graphviz =2.38.0
+  - blast
+  - raxml
+  - mafft
+  - Fasttree
+  - ClustalW
+  - trimal

@@ -1,0 +1,19 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	mafft_align
+	1
+
+[Mon Jan 28 18:47:15 2019]
+rule mafft_align:
+    input: data/ape.fasta
+    output: results/mafft/ape_alignment.afa
+    jobid: 0
+
+[Mon Jan 28 18:47:16 2019]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: /Users/davelunt/Dropbox/work/research/code/snakemake-phylo/.snakemake/log/2019-01-28T184715.638724.snakemake.log
