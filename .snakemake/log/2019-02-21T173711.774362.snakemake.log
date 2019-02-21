@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 5 of /Users/davelunt/Dropbox/work/research/code/snakemake-phylo/Snakefile:
+Missing input files for rule mafft_align:
+data/RaxML_info.ape.fasta

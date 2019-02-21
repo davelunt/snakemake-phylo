@@ -1,7 +1,7 @@
 rule all:
     input:
-        "results/fasttree/ape_alignment.afa.trimal.nwk"
-
+        "results/raxml/out.nwk"
+#results/fasttree/ape_alignment.afa.trimal.nwk
 rule mafft_align:
     input:
         "data/{sample}.fasta"
@@ -20,18 +20,20 @@ rule trimal:
     shell:
         "trimal -in {input} -out {output} -gappyout"
 
-rule fasttree:
-    input:
-        "results/trimal/{sample}.afa.trimal"
-    output:
-        "results/fasttree/{sample}.afa.trimal.nwk",
-    shell:
-        "FastTree -quiet -gtr -nt {input} > {output}"
+# rule fasttree:
+#     input:
+#         "results/trimal/{sample}.afa.trimal"
+#     output:
+#         "results/fasttree/{sample}.afa.trimal.nwk",
+#     shell:
+#         "FastTree -quiet -gtr -nt {input} > {output}"
 
-# rule raxmltree:
-#         input:
-#             "results/trimal/ape_alignment.afa.trimal"
-#         output:
-#             "results/raxml/{input}"
-#         shell:
-#             "raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 --no­bfgs -s {input} -n {output}"
+rule raxmltree:
+        input:
+            "results/trimal/{sample}.afa.trimal"
+        output:
+            "results/raxml/{input}.nwk"
+        shell:
+            "raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s {input} -n"
+            #raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 --no­bfgs -s {input} -n {output}
+#raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s ape_alignment.afa.trimal.fas -n T20
