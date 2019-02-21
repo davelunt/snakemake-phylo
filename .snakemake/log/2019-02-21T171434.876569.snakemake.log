@@ -1,0 +1,30 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	fasttree
+	2
+
+[Thu Feb 21 17:14:34 2019]
+rule fasttree:
+    input: results/trimal/ape_alignment.afa.trimal
+    output: results/fasttree/ape_alignment.afa.trimal.nwk
+    jobid: 1
+    wildcards: sample=ape_alignment
+
+[Thu Feb 21 17:14:35 2019]
+Finished job 1.
+1 of 2 steps (50%) done
+
+[Thu Feb 21 17:14:35 2019]
+localrule all:
+    input: results/fasttree/ape_alignment.afa.trimal.nwk
+    jobid: 0
+
+[Thu Feb 21 17:14:35 2019]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: /Users/davelunt/Dropbox/work/research/code/snakemake-phylo/.snakemake/log/2019-02-21T171434.876569.snakemake.log
