@@ -4,9 +4,9 @@ rule all:
 
 rule mafft_align:
     input:
-        "data/ape.fasta"
+        "data/{sample}.fasta"
     output:
-        "results/mafft/ape_alignment.afa"
+        "results/mafft/{sample}.afa"
     shell:
         "mafft --auto --quiet {input} > {output}"
 
@@ -14,17 +14,17 @@ rule mafft_align:
 # https://vicfero.github.io/trimal/
 rule trimal:
     input:
-        "results/mafft/ape_alignment.afa"
+        "results/mafft/{sample}.afa"
     output:
-        "results/trimal/ape_alignment.afa.trimal"
+        "results/trimal/{sample}.afa.trimal"
     shell:
         "trimal -in {input} -out {output} -gappyout"
 
 rule fasttree:
     input:
-        "results/trimal/ape_alignment.afa.trimal"
+        "results/trimal/{sample}.afa.trimal"
     output:
-        "results/fasttree/ape_alignment.afa.trimal.nwk",
+        "results/fasttree/{sample}.afa.trimal.nwk",
     shell:
         "FastTree -quiet -gtr -nt {input} > {output}"
 
