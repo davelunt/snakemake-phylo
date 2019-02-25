@@ -1,7 +1,6 @@
 rule all:
-    input:
-        "results/raxml/out.nwk"
-#results/fasttree/ape_alignment.afa.trimal.nwk
+    input: "results/raxml/RAxML_bestTree.outRaxml"
+
 rule mafft_align:
     input:
         "data/{sample}.fasta"
@@ -10,8 +9,11 @@ rule mafft_align:
     shell:
         "mafft --auto --quiet {input} > {output}"
 
-# trimAl is a tool for the automated removal of spurious sequences or poorly aligned regions from a multiple sequence alignment
-# https://vicfero.github.io/trimal/
+'''
+trimAl is a tool for the automated removal of spurious sequences or poorly
+aligned regions from a multiple sequence alignment
+https://vicfero.github.io/trimal/
+'''
 rule trimal:
     input:
         "results/mafft/{sample}.afa"
@@ -19,6 +21,7 @@ rule trimal:
         "results/trimal/{sample}.afa.trimal"
     shell:
         "trimal -in {input} -out {output} -gappyout"
+
 
 # rule fasttree:
 #     input:
@@ -30,10 +33,13 @@ rule trimal:
 
 rule raxmltree:
         input:
-            "results/trimal/{sample}.afa.trimal"
+            "results/trimal/ape.afa.trimal"
         output:
-            "results/raxml/{input}.nwk"
+            "results/raxml/RAxML_bestTree.outRaxml"
         shell:
-            "raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s {input} -n"
-            #raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 --no­bfgs -s {input} -n {output}
-#raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s ape_alignment.afa.trimal.fas -n T20
+            "raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s {input} -n outRaxml -p 12345"
+
+# raxml -T 24 -m PROTGAMMAWAG -s {input.phy} -n outRaxml -p 12345 -q {input.partitions}
+
+            # raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 --no­bfgs -s {input} -n {output.dest}
+# raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s ape_alignment.afa.trimal.fas -n T20

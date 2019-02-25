@@ -1,0 +1,110 @@
+IQ-TREE multicore version 1.6.9 for Mac OS X 64-bit built Dec 19 2018
+Developed by Bui Quang Minh, Nguyen Lam Tung, Olga Chernomor,
+Heiko Schmidt, Dominik Schrempf, Michael Woodhams.
+
+Host:    Daves-MacBook.local (AVX2, FMA3, 8 GB RAM)
+Command: iqtree -s results/iqtree/ape.afa.trimal -m GTR+I+G -quiet
+Seed:    533345 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Sat Feb 23 22:26:51 2019
+Kernel:  AVX+FMA - 1 threads (4 CPU cores detected)
+
+HINT: Use -nt option to specify number of threads because your CPU has 4 cores!
+HINT: -nt AUTO will automatically determine the best number of threads to use.
+
+Reading alignment file results/iqtree/ape.afa.trimal ... Fasta format detected
+Alignment most likely contains DNA/RNA sequences
+Alignment has 9 sequences with 656 columns, 108 distinct patterns
+134 parsimony-informative, 40 singleton sites, 482 constant sites
+            Gap/Ambiguity  Composition  p-value
+   1  AY544150.1    8.38%    passed     63.98%
+   2  LC144611.1    0.00%    passed     92.49%
+   3  HM102310.1    2.59%    passed     97.26%
+   4  AY544156.1    8.08%    passed     99.85%
+   5  AY544154.1    8.08%    passed     99.15%
+   6  KP126163.1    2.90%    passed     86.43%
+   7  JF700169.1    3.05%    passed     84.14%
+   8  AY633977.1    2.29%    passed     86.15%
+   9  JF444303.1    0.00%    passed     73.05%
+****  TOTAL         3.93%  0 sequences failed composition chi2 test (p-value<5%; df=3)
+
+Create initial parsimony tree by phylogenetic likelihood library (PLL)... 0.004 seconds
+
+NOTE: 0 MB RAM (0 GB) is required!
+Estimate model parameters (epsilon = 0.100)
+Thoroughly optimizing +I+G parameters from 10 start values...
+Init pinv, alpha: 0.000, 1.000 / Estimate: 0.000, 0.200 / LogL: -1918.234
+Init pinv, alpha: 0.082, 1.000 / Estimate: 0.078, 0.240 / LogL: -1918.529
+Init pinv, alpha: 0.163, 1.000 / Estimate: 0.157, 0.290 / LogL: -1918.768
+Init pinv, alpha: 0.245, 1.000 / Estimate: 0.239, 0.359 / LogL: -1918.922
+Init pinv, alpha: 0.327, 1.000 / Estimate: 0.323, 0.460 / LogL: -1918.944
+Init pinv, alpha: 0.408, 1.000 / Estimate: 0.408, 0.634 / LogL: -1918.807
+Init pinv, alpha: 0.490, 1.000 / Estimate: 0.494, 0.982 / LogL: -1918.428
+Init pinv, alpha: 0.571, 1.000 / Estimate: 0.634, 998.547 / LogL: -1916.591
+Init pinv, alpha: 0.653, 1.000 / Estimate: 0.644, 998.493 / LogL: -1916.579
+Init pinv, alpha: 0.735, 1.000 / Estimate: 0.648, 998.324 / LogL: -1916.614
+Optimal pinv,alpha: 0.644, 998.493 / LogL: -1916.579
+
+Parameters optimization took 0.181 sec
+Computing ML distances based on estimated model parameters... 0.001 sec
+Computing BIONJ tree...
+0.005 seconds
+Log-likelihood of BIONJ tree: -1916.576
+--------------------------------------------------------------------
+|             INITIALIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Generating 99 parsimony trees... 0.074 second
+Computing log-likelihood of 80 initial trees ... 0.089 seconds
+Current best score: -1916.497
+
+Do NNI search on 20 best initial trees
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 1: -1916.474
+Iteration 10 / LogL: -1916.476 / Time: 0h:0m:0s
+Iteration 20 / LogL: -1916.477 / Time: 0h:0m:0s
+Finish initializing candidate tree set (2)
+Current best tree score: -1916.474 / CPU time: 0.285
+Number of iterations: 20
+--------------------------------------------------------------------
+|               OPTIMIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Iteration 30 / LogL: -1916.474 / Time: 0h:0m:0s (0h:0m:1s left)
+Iteration 40 / LogL: -1918.478 / Time: 0h:0m:0s (0h:0m:1s left)
+Iteration 50 / LogL: -1916.514 / Time: 0h:0m:0s (0h:0m:0s left)
+UPDATE BEST LOG-LIKELIHOOD: -1916.474
+Iteration 60 / LogL: -1916.475 / Time: 0h:0m:0s (0h:0m:0s left)
+UPDATE BEST LOG-LIKELIHOOD: -1916.474
+Iteration 70 / LogL: -1916.476 / Time: 0h:0m:0s (0h:0m:0s left)
+Iteration 80 / LogL: -1916.480 / Time: 0h:0m:0s (0h:0m:0s left)
+Iteration 90 / LogL: -1916.479 / Time: 0h:0m:1s (0h:0m:0s left)
+UPDATE BEST LOG-LIKELIHOOD: -1916.474
+Iteration 100 / LogL: -1916.477 / Time: 0h:0m:1s (0h:0m:0s left)
+TREE SEARCH COMPLETED AFTER 102 ITERATIONS / Time: 0h:0m:1s
+
+--------------------------------------------------------------------
+|                    FINALIZING TREE SEARCH                        |
+--------------------------------------------------------------------
+Performs final model parameters optimization
+Estimate model parameters (epsilon = 0.010)
+1. Initial log-likelihood: -1916.474
+Optimal log-likelihood: -1916.472
+Rate parameters:  A-C: 1.61670  A-G: 9.57664  A-T: 1.32301  C-G: 0.04670  C-T: 17.30626  G-T: 1.00000
+Base frequencies:  A: 0.251  C: 0.327  G: 0.162  T: 0.259
+Proportion of invariable sites: 0.642
+Gamma shape alpha: 998.493
+Parameters optimization took 1 rounds (0.002 sec)
+BEST SCORE FOUND : -1916.472
+Total tree length: 0.684
+
+Total number of iterations: 102
+CPU time used for tree search: 0.756 sec (0h:0m:0s)
+Wall-clock time used for tree search: 0.877 sec (0h:0m:0s)
+Total CPU time used: 0.941 sec (0h:0m:0s)
+Total wall-clock time used: 1.099 sec (0h:0m:1s)
+
+Analysis results written to: 
+  IQ-TREE report:                results/iqtree/ape.afa.trimal.iqtree
+  Maximum-likelihood tree:       results/iqtree/ape.afa.trimal.treefile
+  Likelihood distances:          results/iqtree/ape.afa.trimal.mldist
+  Screen log file:               results/iqtree/ape.afa.trimal.log
+
+Date and Time: Sat Feb 23 22:26:52 2019
