@@ -1,7 +1,7 @@
 rule all:
     input: "results/iqtree/ape.afa.trimal.iqtree"
 
-rule mafft_align:
+rule mafft_align: # alignment
     input:
         "data/{sample}.fasta"
     output:
@@ -9,12 +9,7 @@ rule mafft_align:
     shell:
         "mafft --auto --quiet {input} > {output}"
 
-'''
-trimAl is a tool for the automated removal of spurious sequences or poorly
-aligned regions from a multiple sequence alignment
-https://vicfero.github.io/trimal/
-'''
-rule trimal:
+rule trimal: # alignment curation https://vicfero.github.io/trimal/
     input:
         "results/mafft/{sample}.afa"
     output:
@@ -22,7 +17,7 @@ rule trimal:
     shell:
         "trimal -in {input} -out {output} -gappyout"
 
-rule prep_iqtree: #copy the alignment file to iqtree folder
+rule prep_iqtree: # copy the alignment file to iqtree folder
     input:
         "results/trimal/{sample}.afa.trimal"
     output:
@@ -30,7 +25,7 @@ rule prep_iqtree: #copy the alignment file to iqtree folder
     shell:
         "cp {input} {output}"
 
-rule iqtree:
+rule iqtree: # ML phylogenetic analysis
         input:
             "results/iqtree/{sample}.afa.trimal"
         output:
