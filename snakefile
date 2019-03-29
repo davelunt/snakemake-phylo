@@ -38,8 +38,3 @@ rule raxmltree:
             "results/raxml/RAxML_bestTree.outRaxml"
         shell:
             "raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s {input} -n outRaxml -p 12345"
-
-# raxml -T 24 -m PROTGAMMAWAG -s {input.phy} -n outRaxml -p 12345 -q {input.partitions}
-
-            # raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 --no­bfgs -s {input} -n {output.dest}
-# raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s ape_alignment.afa.trimal.fas -n T20
