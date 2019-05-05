@@ -47,10 +47,26 @@ rule fi
 #     shell:
 #         "FastTree -quiet -gtr -nt {input} > {output}"
 
-rule raxmltree:
+# rule raxmltree:
+#         input:
+#             "results/trimal/ape.afa.trimal"
+#         output:
+#             "results/raxml/RAxML_bestTree.outRaxml"
+#         shell:
+#             "raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s {input} -n outRaxml -p 12345"
+
+rule prep_iqtree: # copy the alignment file to iqtree folder
+    input:
+        "results/trimal/{sample}.afa.trimal_fixed"
+    output:
+        "results/iqtree/{sample}.afa.trimal_fixed"
+    shell:
+        "cp {input} {output}"
+
+rule iqtree: # ML phylogenetic analysis
         input:
-            "results/trimal/ape.afa.trimal"
+            "results/iqtree/{sample}.afa.trimal_fixed"
         output:
-            "results/raxml/RAxML_bestTree.outRaxml"
+            "results/iqtree/{sample}.afa.trimal_fixed.iqtree"
         shell:
-            "raxmlHPC -f a -m GTRGAMMA -p 12345 -x 12345 -# 100 -s {input} -n outRaxml -p 12345"
+            "iqtree -s {input} -m GTR+I+G -quiet"
