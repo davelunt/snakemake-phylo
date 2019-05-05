@@ -9,6 +9,14 @@ rule mafft_align:
     shell:
         "mafft --auto --quiet {input} > {output}"
 
+rule replace_spaces: # replace spaces with underscores in fasta
+    input:
+        "results/mafft/{sample}.afa"
+    output:
+        "results/trimal/{sample}.afa"
+    shell:
+        "sed -E 's/ /_/g' {input} {output}"
+
 '''
 trimAl is a tool for the automated removal of spurious sequences or poorly
 aligned regions from a multiple sequence alignment
@@ -22,7 +30,15 @@ rule trimal:
     shell:
         "trimal -in {input} -out {output} -gappyout"
 
+rule replace_underscores: # replace underscores with spaces in fasta
+    input:
+        "results/trimal/{sample}.afa.trimal"
+    output:
+        "results/trimal/{sample}.afa.trimal_fixed"
+    shell:
+        "sed -E 's/_/ /g' {input} {output}"
 
+rule fi
 # rule fasttree:
 #     input:
 #         "results/trimal/{sample}.afa.trimal"

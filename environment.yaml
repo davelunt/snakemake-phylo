@@ -1,6 +1,8 @@
+name: snakephylo
 channels:
   - bioconda
   - conda-forge
+  - bioconda/osx-64
 dependencies:
   - snakemake-minimal =5.2.4
   - python
@@ -15,3 +17,4 @@ dependencies:
   - ClustalW
   - trimal
   - iqtree
+  - ete3
