@@ -1,7 +1,7 @@
 rule all:
-    input: "results/raxml/RAxML_bestTree.outRaxml"
+    input: "reports/iqtree/iqtreefiles.txt"
 
-rule mafft_align:
+rule mafft_align: # alignment
     input:
         "data/{sample}.fasta"
     output:
@@ -17,12 +17,7 @@ rule replace_spaces: # replace spaces with underscores in fasta
     shell:
         "sed -E 's/ /_/g' {input} {output}"
 
-'''
-trimAl is a tool for the automated removal of spurious sequences or poorly
-aligned regions from a multiple sequence alignment
-https://vicfero.github.io/trimal/
-'''
-rule trimal:
+rule trimal: # alignment curation https://vicfero.github.io/trimal/
     input:
         "results/mafft/{sample}.afa"
     output:
@@ -38,7 +33,6 @@ rule replace_underscores: # replace underscores with spaces in fasta
     shell:
         "sed -E 's/_/ /g' {input} {output}"
 
-rule fi
 # rule fasttree:
 #     input:
 #         "results/trimal/{sample}.afa.trimal"
@@ -70,3 +64,8 @@ rule iqtree: # ML phylogenetic analysis
             "results/iqtree/{sample}.afa.trimal_fixed.iqtree"
         shell:
             "iqtree -s {input} -m GTR+I+G -quiet"
+
+# not working!
+rule samples_report: # write the name of every iqtree file to a report
+    shell:
+        "ls results/iqtree/*.afa.trimal_fixed.iqtree >> reports/iqtree/iqtreefiles.txt"
