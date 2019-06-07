@@ -48,8 +48,3 @@ rule iqtree: # ML phylogenetic analysis
             "results/iqtree/{sample}.afa.trimal_fixed.iqtree"
         shell:
             "iqtree -s {input} -m GTR+I+G -quiet"
-
-# not working!
-rule samples_report: # write the name of every iqtree file to a report
-    shell: # is this ls or echo?
-        "ls results/iqtree/*.afa.trimal_fixed.iqtree >> reports/iqtree/iqtreefiles.txt"
