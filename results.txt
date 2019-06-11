@@ -1,0 +1,4 @@
+allseqs.fas
+fasttree/
+mafft/
+trimal/
