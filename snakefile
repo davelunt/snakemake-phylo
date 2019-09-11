@@ -10,7 +10,7 @@ rule mafft_align: # alignment
     shell:
         "mafft --auto --quiet {input} > {output}"
 
-rule trimal: # alignment curation https://vicfero.github.io/trimal/
+rule trimal: # alignment curation
     input:
         "results/mafft/{sample}.afa"
     output:
@@ -18,15 +18,16 @@ rule trimal: # alignment curation https://vicfero.github.io/trimal/
     shell:
         "trimal -in {input} -out {output} -gappyout -keepheader"
 
-rule fasttree:
+rule fasttree: # build ML phylogenetic tree
     input:
         "results/trimal/{sample}.afa.trimal"
     output:
         "results/fasttree/{sample}.afa.trimal.nwk",
-        touch("finished.done")
     shell:
-        "FastTree -quiet -gtr -nt {input} > {output}"
-
+        '''
+        FastTree -quiet -gtr -nt {input} > {output}
+        touch finished.done
+        '''
 # rule raxmltree:
 #         input:
 #             "results/trimal/{sample}.afa.trimal"

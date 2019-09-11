@@ -1,0 +1,8 @@
+conda env create --name snakemake-tutorial --file environment.yaml
+conda activate snakemake-tutorial
+conda install -c bioconda flash
+conda env update -f environment.yaml
+conda info --envs
+
+#if .yaml has name option specified
+conda env create --file environment.yaml
