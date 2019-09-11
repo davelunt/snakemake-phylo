@@ -48,10 +48,10 @@ rule iqtree: # ML phylogenetic analysis
             "results/iqtree/{sample}.afa.trimal_fixed.iqtree"
         shell:
             "iqtree -s {input} -m GTR+I+G -quiet"
-ule iqtree: # ML phylogenetic analysis
-        input:
-            "results/iqtree/{sample}.afa.trimal_fixed"
-        output:
-            "results/iqtree/{sample}.afa.trimal_fixed.iqtree"
-        shell:
-            python "myspp.py" -i 'input.fas' -o 'output.afa'
+# rule iqtree: # ML phylogenetic analysis
+#         input:
+#             "results/iqtree/{sample}.afa.trimal_fixed"
+#         output:
+#             "results/iqtree/{sample}.afa.trimal_fixed.iqtree"
+#         shell:
+#             python "myspp.py" -i 'input.fas' -o 'output.afa'
